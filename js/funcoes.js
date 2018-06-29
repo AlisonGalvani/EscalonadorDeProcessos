@@ -52,7 +52,7 @@ function escalonar(modo) {
         case "fifo":
             for (row in Processo) {                                                         //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + Processo[row].tempo;            //somando tempo total dos processos
-                addProcessoVisual(Processo[row], tempoTotal);                               //adicionando processo no rodapé
+                addProcessoVisual(Processo[row], tempoTotalProcessos);                               //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, Processo[row].nome, tempoTotalProcessos);    //adicionando processo ao gráfico
             }            
         break;
@@ -64,7 +64,7 @@ function escalonar(modo) {
 
             for (row in ProcessoAuxiliar) {                                                         //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + ProcessoAuxiliar[row].tempo;            //somando tempo total dos processos
-                addProcessoVisual(Processo[row], tempoTotal);                                       //adicionando processo no rodapé
+                addProcessoVisual(Processo[row], tempoTotalProcessos);                                       //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, ProcessoAuxiliar[row].nome, tempoTotalProcessos);    //adicionando processo ao gráfico
             }
         break;
@@ -77,7 +77,7 @@ function escalonar(modo) {
             for (row in ProcessoAuxiliar) {                                                        //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + ProcessoAuxiliar[row].tempo;           //somando tempo total dos processos
 
-                addProcessoVisual(ProcessoAuxiliar[row], tempoTotal);                              //adicionando processo no rodapé
+                addProcessoVisual(ProcessoAuxiliar[row], tempoTotalProcessos);                              //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, ProcessoAuxiliar[row].nome, tempoTotalProcessos);   //adicionando processo ao gráfico
             }
         break;
