@@ -208,7 +208,7 @@ function addProcessoVisual(processoNovo, tempo){
 
     $("#tempo").remove();
 
-    var tempoMedio = `<h2 id="tempo">Tempo Médio: <strong> ${mediaTempoExecucao} s. </strong></h2>`
+    var tempoMedio = `<h4 id="tempo">Tempo Médio: <strong> ${mediaTempoExecucao} s. </strong></h4>`
     $("#tempoMedio").append(tempoMedio);
     tempoMedio = "";
                 
