@@ -1,6 +1,7 @@
 var _indiceProcessos = 0;   //var que grava a ordem de inserção dos processos
-var mediaTempoProcessos=0;  //var que guarda a media de tempo dos processos
 var tempoTotalProcessos=0;  //var que guarda a soma do tempo dos processos
+var tempoTotalExecucao=0;   //var que guarda tempo total da execuçao de todos os processos
+var mediaTempoExecucao=0;  //var que guarda a media de tempo de execucao
 var graficoChart;           //var que contem o grafico de barras
 var Processo = new Array(); //array do tipo Processos
 
@@ -29,9 +30,12 @@ function inserirProcesso() {
     novoProcesso = new Processos(nome, prioridade, tempo);                       //criando novo objeto processo
     Processo.push(novoProcesso);                                                 //atribuindo ao array de processos o novo processo
  
-    tempoTotalProcessos += novoProcesso.tempo;                                   //atribuindo o tempo do processo a variavel contadora  	        
-    mediaTempoProcessos = (tempoTotalProcessos/Processo.length).toFixed(1);      //calculando tempo médio do processo e formatando com uma casa decimal (toFixed(1))
-
+    tempoTotalProcessos += novoProcesso.tempo;                                   //atribuindo o tempo do processo a variavel contadora 
+    tempoTotalExecucao += tempoTotalProcessos;                                   //atribuindo o tempo de execucao variavel contadora
+    console.log("Tempo total: ", tempoTotalExecucao)                           	        
+    mediaTempoExecucao = (tempoTotalExecucao/Processo.length).toFixed(1);        //calculando tempo médio da execucao e formatando com uma casa decimal (toFixed(1))
+    console.log("Media: ", mediaTempoExecucao)
+    console.log("T: ", Processo.length)
     atualizarGrafico(graficoChart,[novoProcesso.nome], [tempoTotalProcessos]);   //atualizando gráfico com o novo processo
     addProcessoVisual(novoProcesso, tempoTotalProcessos);                        //inserindo visualmente o processo no rodapé da página   
     
@@ -41,6 +45,8 @@ function inserirProcesso() {
 function escalonar(modo) {
 
     tempoTotalProcessos = 0;     //zerando variavel que armazena tempo total
+    tempoTotalExecucao=0;
+    mediaTempoExecucao=0;
 
     graficoChart.destroy();     //destroindo o gráfico para criar um novo ordenado                                                                 
     Criagrafico();              //criando um novo gráfico ainda vazio
@@ -52,6 +58,8 @@ function escalonar(modo) {
         case "fifo":
             for (row in Processo) {                                                         //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + Processo[row].tempo;            //somando tempo total dos processos
+                tempoTotalExecucao += tempoTotalProcessos;
+                mediaTempoExecucao = (tempoTotalExecucao/Processo.length).toFixed(1);
                 addProcessoVisual(Processo[row], tempoTotalProcessos);                               //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, Processo[row].nome, tempoTotalProcessos);    //adicionando processo ao gráfico
             }            
@@ -64,6 +72,8 @@ function escalonar(modo) {
 
             for (row in ProcessoAuxiliar) {                                                         //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + ProcessoAuxiliar[row].tempo;            //somando tempo total dos processos
+                tempoTotalExecucao += tempoTotalProcessos;
+                mediaTempoExecucao = (tempoTotalExecucao/Processo.length).toFixed(1);
                 addProcessoVisual(Processo[row], tempoTotalProcessos);                                       //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, ProcessoAuxiliar[row].nome, tempoTotalProcessos);    //adicionando processo ao gráfico
             }
@@ -76,7 +86,8 @@ function escalonar(modo) {
 
             for (row in ProcessoAuxiliar) {                                                        //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + ProcessoAuxiliar[row].tempo;           //somando tempo total dos processos
-
+                tempoTotalExecucao += tempoTotalProcessos;
+                mediaTempoExecucao = (tempoTotalExecucao/Processo.length).toFixed(1);
                 addProcessoVisual(ProcessoAuxiliar[row], tempoTotalProcessos);                              //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, ProcessoAuxiliar[row].nome, tempoTotalProcessos);   //adicionando processo ao gráfico
             }
@@ -197,7 +208,7 @@ function addProcessoVisual(processoNovo, tempo){
 
     $("#tempo").remove();
 
-    var tempoMedio = `<h2 id="tempo">Tempo Médio: <strong> ${mediaTempoProcessos} s. </strong></h2>`
+    var tempoMedio = `<h2 id="tempo">Tempo Médio: <strong> ${mediaTempoExecucao} s. </strong></h2>`
     $("#tempoMedio").append(tempoMedio);
     tempoMedio = "";
                 

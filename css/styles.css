@@ -9,11 +9,13 @@ body{
   display: inline-block;
   width: 100%;
   /* color: #2d78b9 */
+  overflow: hidden;
 }
 
 .esquerda{
   /* background: blue; */
   display: inline-block;
+  overflow: hidden;
 }
 
 .btn-sm{
@@ -65,10 +67,11 @@ body{
 
 
 .grafico-barra{
+  margin-top: 30px;
   width: 80%;
   /* background: purple; */
   display: inline-block;
-
+  overflow: hidden;
 }
 
 .direita {
@@ -77,11 +80,11 @@ body{
   /* background: green; */
   vertical-align: top;
   width: 81%;
+  overflow: hidden;
 }
 
 .processos{
-  width: 100%;
-  margin-top: 20px;
+  width: 98%;
   margin-left: 15px;
   background: #1E1D1D;
   border: 2px #2C2C2C solid;
