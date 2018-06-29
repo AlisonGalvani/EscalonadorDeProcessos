@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh">
+    <link rel="stylesheet" href="Bootstrap/css/Bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    
+    <!-- <script src="angular/angular.min.js"></script> -->
+    <script src="js/funcoes.js"></script>
+    <script src="js/Chart.min.js"></script>
+
+
+
+    <title>SO</title>
+</head>
+
+<body onload="Criagrafico()">
+
+    <div class="main">
+        <div class="esquerdaDireita">
+            <div class="esquerda">
+                <div class="opcoes">
+                    <fieldset>                        
+                        <h5>Escalonar com</h5>
+                       
+                        <button onclick="escalonar('fifo')" class="btn btn-outline-success btn-sm">
+                            Fifo
+                        </button>
+
+                        <button onclick="escalonar('maisCurto')" class="btn btn-outline-success btn-sm">
+                            + Curto
+                        </button>
+
+                        <button onclick="escalonar('prioridade')" class="btn btn-outline-success btn-sm">
+                            Prioridade
+                        </button>
+
+                        <button class="btn btn-outline-success btn-sm">
+                            Circular
+                        </button>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <h5>
+                            Criar novo processo
+                        </h5>
+
+                        <label class="label label-success">Nome</label>
+                        <input type="text" id="inputNome">
+
+                        <label>Prioridade</label>
+                        <input type="number" id="inputPrioridade">
+
+                        <label>Tempo</label>
+                        <input type="number" id="inputTempo">
+
+                        <button onclick="inserirProcesso()" class="btn btn-outline-primary btn-sm">
+                            Inserir
+                        </button>
+                    </fieldset>
+                </div>
+                <!--fim opcoes-->
+
+                <!-- <div class="processos">
+                    asdasdasdasds
+                </div> -->
+            </div>
+            <!--fim esquerda-->
+
+            <div class="direita">
+                <div class="grafico-barra">
+                    <canvas id="grafico-barra"></canvas>
+                </div>
+                <div id="tempoMedio">
+                </div>
+            </div>
+            <!--fim div direita-->
+        </div>
+        <!-- fim diva esquerdaDireita-->
+        <div class="processos">
+            <div class="teste">
+                <!-- <legend>
+                    Processos
+                </legend> -->
+                    <div id="nomes"></div>        
+                
+            </div>
+        </div> <!--fim processos-->
+    </div>
+    <!-- fim div main -->
+
+    <script src="js/jquery/jquery-3.3.1.js"></script>
+    <!-- <script src="Bootstrap/js/Bootstrap.min.js"></script> -->
+
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+
+body{
+  background: #151515;
+  color: white;
+}
+
+.esquerdaDireita {
+  /* background: yellow; */
+  display: inline-block;
+  width: 100%;
+  /* color: #2d78b9 */
+}
+
+.esquerda{
+  /* background: blue; */
+  display: inline-block;
+}
+
+.btn-sm{
+  height: 25px;
+  line-height: 0.5;
+}
+
+.opcoes button {
+  display: block;
+  width: 150px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.opcoes label{
+  width: 150px;
+  margin-left: 25px;
+  margin-right: 25px;
+  display: block;
+  margin-top: 10px;
+  height: 15px;
+}
+
+.opcoes input {
+  height: 20px;
+  background: #1E1D1D;
+  border: 1px solid #28a745;
+  color: wheat;
+}
+
+.opcoes fieldset {
+  margin-left: 15px;
+  margin-top: 10px;
+  background: #1E1D1D;
+  border: 2px #2C2C2C solid;
+}
+
+.opcoes label, input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.opcoes h5{
+  text-align: center;
+  margin-top: 5px;
+}
+
+
+.grafico-barra{
+  width: 80%;
+  /* background: purple; */
+  display: inline-block;
+
+}
+
+.direita {
+  /* float: right; */
+  display: inline-block;
+  /* background: green; */
+  vertical-align: top;
+  width: 81%;
+}
+
+.processos{
+  width: 100%;
+  margin-top: 20px;
+  margin-left: 15px;
+  background: #1E1D1D;
+  border: 2px #2C2C2C solid;
+}
+
+.processos fieldset {
+  border: 2px #007bff solid;
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.processos label {
+  height: 17px;
+}
+
+.processos h6{
+  text-align: center;
+}
+.fieldProcesso{
+
+
+  display: inline-block;
+}
+
+#nomes label{
+  display: block;
+  margin-top: 5px;
+}
+
+#tempoMedio{
+  display: inline-block;
+  vertical-align: top;
+}
+
+#tempoMedio strong{
+  display: block;
+  text-align: center;
+
+}
