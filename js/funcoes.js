@@ -10,7 +10,8 @@ function Processos(_nome, _prioridade, _tempo){
     this.indice = _indiceProcessos++;
     this.nome = _nome;
     this.prioridade = _prioridade;
-    this.tempo = _tempo
+    this.tempo = _tempo;
+    this.tempoDeExecucao;
 }
 
 
@@ -47,6 +48,7 @@ function escalonar(modo) {
     tempoTotalProcessos = 0;     //zerando variavel que armazena tempo total
     tempoTotalExecucao=0;
     mediaTempoExecucao=0;
+    var ProcessoAuxiliar = new Array(); //criando array de processo auxiliar que recebera os processos ordenados
 
     graficoChart.destroy();     //destroindo o gráfico para criar um novo ordenado                                                                 
     Criagrafico();              //criando um novo gráfico ainda vazio
@@ -56,18 +58,19 @@ function escalonar(modo) {
 
         //se fifo
         case "fifo":
+            console.log("Processo: ", Processo);
+            // ProcessoAuxiliar = selectionSortFifo(Processo); 
             for (row in Processo) {                                                         //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + Processo[row].tempo;            //somando tempo total dos processos
                 tempoTotalExecucao += tempoTotalProcessos;
                 mediaTempoExecucao = (tempoTotalExecucao/Processo.length).toFixed(1);
-                addProcessoVisual(Processo[row], tempoTotalProcessos);                               //adicionando processo no rodapé
+                addProcessoVisual(Processo[row], tempoTotalProcessos);                      //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, Processo[row].nome, tempoTotalProcessos);    //adicionando processo ao gráfico
             }            
         break;
 
         //se +curto    
         case "maisCurto":
-            var ProcessoAuxiliar = new Array();                                                     //criando array de processo auxiliar que recebera os processos ordenados
             ProcessoAuxiliar = selectionSortTempo(Processo);                                        //Chamando função de ordenação por tempo, passando o array de processos e atribuindo o retorno para a var auxiliar
 
             for (row in ProcessoAuxiliar) {                                                         //percorrendo os processos
@@ -81,8 +84,8 @@ function escalonar(modo) {
 
         //se prioridade    
         case "prioridade":
-            var ProcessoAuxiliar = new Array();                                                    //criando array de processo auxiliar que recebera os processos ordenados
             ProcessoAuxiliar = selectionSortPrioridade(Processo);                                  //Chamando função de ordenação por tempo, passando o array de processos e atribuindo o retorno para a var auxiliar
+            
 
             for (row in ProcessoAuxiliar) {                                                        //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + ProcessoAuxiliar[row].tempo;           //somando tempo total dos processos
@@ -92,9 +95,55 @@ function escalonar(modo) {
                 atualizarGrafico(graficoChart, ProcessoAuxiliar[row].nome, tempoTotalProcessos);   //adicionando processo ao gráfico
             }
         break;
+
+        case "circular":
+            var tempoCircular=0;
+            console.log("OPAA2222: ", Processo);
+            ProcessoAuxiliar = Processo;
+            ProcessoOrdenadoFifo = new Array();
+            
+            console.log("Tamanho fora if: ", ProcessoAuxiliar.length, ProcessoAuxiliar);
+       var j=0
+                while(ProcessoAuxiliar.length > 0){ //enquanto existir processos
+                    j++
+                    for (row in ProcessoAuxiliar){
+                        ProcessoAuxiliar[row].tempo--;
+                        console.log(`Processo: ${ProcessoAuxiliar[row].nome}, Tempo: ${ProcessoAuxiliar[row].tempo}`);
+                        tempoCircular++;
+                        if(ProcessoAuxiliar[row].tempo == 0){
+                            ProcessoOrdenadoFifo.push(Processo[row]);
+                            console.log("OPAA: ", Processo[row]);
+                            ProcessoOrdenadoFifo.tempoDeExecucao = tempoCircular;
+                            ProcessoAuxiliar.splice(ProcessoAuxiliar[row-1,1]);
+                            // for (i=ProcessoAuxiliar[row]; i<ProcessoAuxiliar.length-1; i++){
+                            //     ProcessoAuxiliar[i] = ProcessoAuxiliar[i+1];
+                            // }
+                            // ProcessoAuxiliar.pop();
+                            console.log("Tamanho dentro do if: ", ProcessoAuxiliar.length, ProcessoAuxiliar)
+                        }
+                }
+            }
+            console.log("ordenado: ", ProcessoOrdenadoFifo);
+        break;
     }
 
 }
+
+//Selection sorte para ordenação por Fifo
+function selectionSortFifo(array) {
+    for (var i = 0; i < array.length; i++) {
+        var min = i;
+        for (var j = i + 1; j < array.length; j++) {
+            if (array[j].indice < array[min].indice) {
+                min = j;
+            }
+        }
+        var temp = array[i];
+        array[i] = array[min];
+        array[min] = temp;
+    }
+    return array;
+};
 
 //Selection sorte para ordenação por tempo
 function selectionSortTempo(array) {
@@ -127,6 +176,7 @@ function selectionSortPrioridade(array) {
     }
     return array;
 };
+
 
 //Função que cria o gráfico com todo os parametros necessario e instancia na variavel global graficoChart
 function Criagrafico() {
