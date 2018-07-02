@@ -23,6 +23,18 @@ function inserirProcesso() {
     var prioridade = parseInt(document.getElementById('inputPrioridade').value);
     var tempo      = parseInt(document.getElementById('inputTempo').value);
 
+    //validando se o campo nome está preenchido
+    if (nome = "" || nome == null){
+        alert("O campo nome deve estar preenchido!");
+        return false;
+    };
+    
+    //validando se os campos prioridade e tempo estão preenchidos com numeros
+    if (isNaN(prioridade) || prioridade == "" || isNaN(tempo) || tempo == ""){
+        alert("Para prioridade e tempo digite apenas numeros!");
+        return false;
+    };
+ 
     //zerando inputs visual
     document.getElementById('inputNome').value       = "";
     document.getElementById('inputPrioridade').value = "";
