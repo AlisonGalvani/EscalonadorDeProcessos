@@ -133,3 +133,10 @@ body{
   margin-top:10%;
   margin-left: 40px;
 }
+
+#autor{
+  color: white;
+  opacity: 0.2;
+  margin-top: 40px;
+  margin-left: 15px;
+}
