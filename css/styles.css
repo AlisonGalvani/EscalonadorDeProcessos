@@ -97,6 +97,8 @@ body{
   margin-bottom: 10px;
   padding: 8px;
   font-size: 14px;
+  animation-name: insercao-processos;
+	animation-duration: 4s;
 }
 
 .processos label {
@@ -139,4 +141,18 @@ body{
   opacity: 0.2;
   margin-top: 5px;
   margin-left: 15px;
+}
+
+@keyframes insercao-processos {
+  
+  0% {opacity: 0; transform: translate(-50px, 0px);}
+  50% {opacity: 0.5}
+  50% {opacity: 1; transform: translate(0px, 0px)}
+  100% {opacity: 1}
+}
+
+@keyframes navbar {
+	
+	
+	
 }
