@@ -67,13 +67,15 @@ function escalonar(modo) {
     switch (modo) {
 
         //se fifo
-        case "fifo": 
-            for (row in Processo) {                                                         //percorrendo os processos
-                tempoTotalProcessos = tempoTotalProcessos + Processo[row].tempo;            //somando tempo total dos processos
+        case "fifo":
+            ProcessoAuxiliar = selectionSortFifo(Processo);
+
+            for (row in ProcessoAuxiliar) {                                                         //percorrendo os processos
+                tempoTotalProcessos = tempoTotalProcessos + ProcessoAuxiliar[row].tempo;            //somando tempo total dos processos
                 tempoTotalExecucao  += tempoTotalProcessos;                                 //calculando tempo total de execução
                 mediaTempoExecucao  = (tempoTotalExecucao/Processo.length).toFixed(1);      //calculando a media de tempo de execução dos processos, formatando com uma casa decimal
-                addProcessoVisual(Processo[row], tempoTotalProcessos);                      //adicionando processo no rodapé
-                atualizarGrafico(graficoChart, Processo[row].nome, tempoTotalProcessos);    //adicionando processo ao gráfico
+                addProcessoVisual(ProcessoAuxiliar[row], tempoTotalProcessos);                      //adicionando processo no rodapé
+                atualizarGrafico(graficoChart, ProcessoAuxiliar[row].nome, tempoTotalProcessos);    //adicionando processo ao gráfico
             }            
         break;
 
@@ -157,8 +159,23 @@ function escalonar(modo) {
 
 }
 
+//SelectionSort para odenação por fifo
+function selectionSortFifo(array) {
+    for (var i = 0; i < array.length; i++) {
+        var min = i;
+        for (var j = i + 1; j < array.length; j++) {
+            if (array[j].indice < array[min].indice) {
+                min = j;
+            }
+        }
+        var temp = array[i];
+        array[i] = array[min];
+        array[min] = temp;
+    }
+    return array;
+};
 
-//Selection sorte para ordenação por tempo
+//SelectionSort para ordenação por tempo
 function selectionSortTempo(array) {
     for (var i = 0; i < array.length; i++) {
         var min = i;
@@ -174,7 +191,7 @@ function selectionSortTempo(array) {
     return array;
 };
 
-//Selection sorte para ordenação por Prioridade
+//SelectionSort para ordenação por Prioridade
 function selectionSortPrioridade(array) {
     for (var i = 0; i < array.length; i++) {
         var min = i;
