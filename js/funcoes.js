@@ -180,7 +180,16 @@ function selectionSortTempo(array) {
     for (var i = 0; i < array.length; i++) {
         var min = i;
         for (var j = i + 1; j < array.length; j++) {
-            if (array[j].tempo < array[min].tempo) {
+
+            if (array[j].tempo === array[min].tempo){
+                if (array[j].prioridade === array[min].prioridade){
+                    if (array[j].indice < array[min].indice){
+                        min = j;
+                    }
+                }else if (array[j].prioridade > array[min].prioridade){
+                    min = j;                    
+                }                 
+            }else if (array[j].tempo < array[min].tempo){
                 min = j;
             }
         }
@@ -196,7 +205,16 @@ function selectionSortPrioridade(array) {
     for (var i = 0; i < array.length; i++) {
         var min = i;
         for (var j = i + 1; j < array.length; j++) {
-            if (array[j].prioridade > array[min].prioridade) {
+
+            if (array[j].prioridade === array[min].prioridade){
+                if (array[j].tempo === array[min].tempo){
+                    if (array[j].indice < array[min].indice){
+                        min = j;
+                    }
+                }else if (array[j].tempo < array[min].tempo){
+                    min = j;                    
+                }                 
+            }else if (array[j].prioridade > array[min].prioridade){
                 min = j;
             }
         }
