@@ -17,6 +17,25 @@
             <div class="esquerda">
                 <div class="opcoes">
                     <fieldset>
+                            <h5>
+                                Criar novo processo
+                            </h5>
+
+                            <label class="label label-success">Nome</label>
+                            <input type="text" id="inputNome">
+
+                            <label>Prioridade</label>
+                            <input type="number" id="inputPrioridade">
+
+                            <label>Tempo</label>
+                            <input type="number" id="inputTempo">
+
+                            <button onclick="inserirProcesso()" class="btn btn-outline-primary btn-sm">
+                                Inserir
+                            </button>
+                        </fieldset>
+
+                    <fieldset>
                         <h5>Escalonar com</h5>
 
                         <button onclick="escalonar('fifo')" class="btn btn-outline-success btn-sm">
@@ -37,24 +56,7 @@
 
                     </fieldset>
 
-                    <fieldset>
-                        <h5>
-                            Criar novo processo
-                        </h5>
 
-                        <label class="label label-success">Nome</label>
-                        <input type="text" id="inputNome">
-
-                        <label>Prioridade</label>
-                        <input type="number" id="inputPrioridade">
-
-                        <label>Tempo</label>
-                        <input type="number" id="inputTempo">
-
-                        <button onclick="inserirProcesso()" class="btn btn-outline-primary btn-sm">
-                            Inserir
-                        </button>
-                    </fieldset>
                 </div>
                 <div id="autor">
                     <strong>Created by: Alison Galvani</strong>

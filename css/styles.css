@@ -143,6 +143,90 @@ body{
   margin-left: 15px;
 }
 
+@media (max-width: 700px){
+  .opcoes button {
+    display: block;
+    width: 75px;
+    margin-left: 10px;
+    margin-right: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .opcoes label{
+    margin-top: 0;
+  }
+  
+  .opcoes input {
+    width: 70px;
+  }
+  
+  .opcoes fieldset {
+    width: 100px;
+    margin-left: 10px;
+    display: inline;
+  }
+  
+  .opcoes label, input {
+    margin-left: 10px;
+    /* margin-right: 5px; */
+  }
+  
+  .opcoes h5{
+    margin-top: 5px;
+    font-size: 16px;
+  }
+  
+  .esquerdaDireita {
+    display: inline;
+    /* width: 100%; */
+  }
+
+  .esquerda{
+    width: 110px;
+    /* background: yellow; */
+  }
+
+  .direita{
+    width: 67%;
+    /* background: red; */
+  }
+
+  .grafico-barra{
+    margin-top: 25px;
+    width: 105%;
+  }
+
+  .processos{
+    width: 63%;
+    margin-right: 10px;
+    float: right;
+    margin-top: -270px;
+  }
+  
+  .processos fieldset {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 12px;
+  }
+  
+  .processos label {
+    height: 17px;
+  }
+
+  #tempoMedio{
+    margin-left:  50px;
+  }
+
+  #autor{
+    margin-left: 10px;
+    font-size: 12px;
+  }
+}
+
+
 @keyframes insercao-processos {
   
   0% {opacity: 0; transform: translate(-50px, 0px);}
