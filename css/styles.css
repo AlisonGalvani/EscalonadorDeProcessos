@@ -143,6 +143,24 @@ body{
   margin-left: 15px;
 }
 
+@media (max-width: 1300px){
+  .grafico-barra{
+    width: 80%;
+  }
+  
+  .direita{
+    width: 73%;
+  }
+
+  #tempoMedio h4{
+    font-size: 16px;
+    text-align: left;
+    margin-top:10%;
+    margin-left: 1px;
+  }
+
+}
+
 @media (max-width: 700px){
   .opcoes button {
     display: block;
