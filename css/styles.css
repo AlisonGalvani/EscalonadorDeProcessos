@@ -66,18 +66,18 @@ body{
 }
 
 
-.grafico-barra{
+.grafico-barra {
   margin-top: 30px;
   width: 80%;
   /* background: purple; */
-  display: inline-block;
+  display: inline-flex;
   overflow: hidden;
+  float: left;
 }
 
 .direita {
   /* float: right; */
   display: inline-block;
-  /* background: green; */
   vertical-align: top;
   width: 81%;
   overflow: hidden;
@@ -109,8 +109,6 @@ body{
   text-align: center;
 }
 .fieldProcesso{
-
-
   display: inline-block;
 }
 
@@ -122,18 +120,24 @@ body{
 #tempoMedio{
   display: inline-block;
   vertical-align: top;
+  text-align: center;
+  margin-top: 10%;
+  margin-left: 40px;
+}
+
+.LabelModo{
+  display: inline-block;
+  text-align: center;
+  text-anchor: middle;
+  margin-left:40px;
+  margin-top: 3%;
+  padding: 0;
+  color: white;
 }
 
 #tempoMedio strong{
   display: block;
   text-align: center;
-
-}
-
-#tempoMedio{ 
-  text-align: center;
-  margin-top:10%;
-  margin-left: 40px;
 }
 
 #autor{

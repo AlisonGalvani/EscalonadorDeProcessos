@@ -45,10 +45,11 @@ function inserirProcesso() {
  
     tempoTotalProcessos += novoProcesso.tempo;                                   //atribuindo o tempo do processo a variavel contadora 
     tempoTotalExecucao += tempoTotalProcessos;                                   //atribuindo o tempo de execucao variavel contadora                        	        
-    mediaTempoExecucao = (tempoTotalExecucao/Processo.length).toFixed(1);        //calculando tempo médio da execucao e formatando com uma casa decimal (toFixed(1))
+    mediaTempoExecucao = (tempoTotalExecucao/Processo.length).toPrecision(3);        //calculando tempo médio da execucao e formatando com uma casa decimal (toPrecision(1))
     atualizarGrafico(graficoChart,[novoProcesso.nome], [tempoTotalProcessos]);   //atualizando gráfico com o novo processo
-    addProcessoVisual(novoProcesso, tempoTotalProcessos);                        //inserindo visualmente o processo no rodapé da página   
+    addProcessoVisual(novoProcesso, tempoTotalProcessos, "FIFO");                        //inserindo visualmente o processo no rodapé da página   
     
+    document.getElementById('inputNome').focus();
 }
 
 // função que escalona os processos, recebendo como parametro o tipo do escalonamento
@@ -72,9 +73,9 @@ function escalonar(modo) {
 
             for (row in ProcessoAuxiliar) {                                                         //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + ProcessoAuxiliar[row].tempo;            //somando tempo total dos processos
-                tempoTotalExecucao  += tempoTotalProcessos;                                 //calculando tempo total de execução
-                mediaTempoExecucao  = (tempoTotalExecucao/Processo.length).toFixed(1);      //calculando a media de tempo de execução dos processos, formatando com uma casa decimal
-                addProcessoVisual(ProcessoAuxiliar[row], tempoTotalProcessos);                      //adicionando processo no rodapé
+                tempoTotalExecucao  += tempoTotalProcessos;                                         //calculando tempo total de execução
+                mediaTempoExecucao  = (tempoTotalExecucao/Processo.length).toPrecision(3);              //calculando a media de tempo de execução dos processos, formatando com uma casa decimal
+                addProcessoVisual(ProcessoAuxiliar[row], tempoTotalProcessos, "FIFO");              //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, ProcessoAuxiliar[row].nome, tempoTotalProcessos);    //adicionando processo ao gráfico
             }            
         break;
@@ -86,8 +87,8 @@ function escalonar(modo) {
             for (row in ProcessoAuxiliar) {                                                         //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + ProcessoAuxiliar[row].tempo;            //somando tempo total dos processos
                 tempoTotalExecucao  += tempoTotalProcessos;                                         //calculando tempo total de execução
-                mediaTempoExecucao  = (tempoTotalExecucao/Processo.length).toFixed(1);              //calculando a media de tempo de execução dos processos, formatando com uma casa decimal
-                addProcessoVisual(Processo[row], tempoTotalProcessos);                              //adicionando processo no rodapé
+                mediaTempoExecucao  = (tempoTotalExecucao/Processo.length).toPrecision(3);          //calculando a media de tempo de execução dos processos, formatando com uma casa decimal
+                addProcessoVisual(Processo[row], tempoTotalProcessos, "MAIS CURTO");                //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, ProcessoAuxiliar[row].nome, tempoTotalProcessos);    //adicionando processo ao gráfico
             }
         break;
@@ -99,8 +100,8 @@ function escalonar(modo) {
             for (row in ProcessoAuxiliar) {                                                        //percorrendo os processos
                 tempoTotalProcessos = tempoTotalProcessos + ProcessoAuxiliar[row].tempo;           //somando tempo total dos processos
                 tempoTotalExecucao  += tempoTotalProcessos;                                        //calculando tempo total de execução
-                mediaTempoExecucao  = (tempoTotalExecucao/Processo.length).toFixed(1);             //calculando a media de tempo de execução dos processos, formatando com uma casa decimal
-                addProcessoVisual(ProcessoAuxiliar[row], tempoTotalProcessos);                     //adicionando processo no rodapé
+                mediaTempoExecucao  = (tempoTotalExecucao/Processo.length).toPrecision(3);             //calculando a media de tempo de execução dos processos, formatando com uma casa decimal
+                addProcessoVisual(ProcessoAuxiliar[row], tempoTotalProcessos, "PRIORIDADE");       //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, ProcessoAuxiliar[row].nome, tempoTotalProcessos);   //adicionando processo ao gráfico
             }
         break;
@@ -112,7 +113,7 @@ function escalonar(modo) {
             var tempoCircular=0;                                                                   //Variavel que soma os tempos do circular
             var indice=0;                                                                          //indice para controlar a reorganização dos tempos
             var flag = false;                                                                      //flag usada para saber quando excluir um processo do array de processo auxiliar                           
-            var indiceExclusao;                                                                    //variavel que armazena o indice de qual posicao de auxiliar dev ser excluida
+            var indiceExclusao;                                                                    //variavel que armazena o indice de qual posicao de auxiliar deve ser excluida
             var tempoTotal = new Array();                                                          //Array que armazena o tempo total de cada termino de processo
             
 
@@ -124,7 +125,6 @@ function escalonar(modo) {
                 {
                     ProcessoAuxiliar[row].tempo--;                                                              //diminui o tempo dos processos
                     tempoCircular++;                                                                            //aumenta em 1 tempos o tempo total de execução    
-                    mediaTempoExecucao = (tempoCircular/Processo.length).toFixed(1);                            //calcula a média do tempo de execução e formata com uma casa decimal
 
                     //se o tempo do processo lido chegou a 0
                     if(ProcessoAuxiliar[row].tempo === 0){                       
@@ -150,7 +150,14 @@ function escalonar(modo) {
                         break;                        
                     } 
                 }
-                addProcessoVisual(ProcessoOrdenadoCircular[indice], tempoTotal[indice]);                      //adicionando processo no rodapé
+                if (indice === Processo.length-1){
+                    mediaTempoExecucao += tempoTotal[indice]; 
+                    mediaTempoExecucao = (mediaTempoExecucao/Processo.length).toPrecision(3);
+                }
+                else{
+                    mediaTempoExecucao += tempoTotal[indice];                                                 //calcula a média do tempo de execução e formata com uma casa decimal
+                }
+                addProcessoVisual(ProcessoOrdenadoCircular[indice], tempoTotal[indice], "CIRCULAR");          //adicionando processo no rodapé
                 atualizarGrafico(graficoChart, ProcessoOrdenadoCircular[indice].nome, tempoTotal[indice]);    //adicionando processo ao gráfico
                 indice++;
             }
@@ -269,7 +276,7 @@ function Criagrafico() {
                     },
                     scaleLabel: {
                         display: true,
-                        labelString: 'Tempo em S.',
+                        labelString: 'Tempo em MS.',
                         fontColor: 'white'
                     }
                 }],
@@ -292,7 +299,7 @@ function atualizarGrafico(chart, label, data) {
 }
 
 
-function addProcessoVisual(processoNovo, tempo){
+function addProcessoVisual(processoNovo, tempo, modo){
 
     var input = '<fieldset class="fieldProcesso" id="teste">';
         input +=`<h6>Processo: ${processoNovo.nome}</h6>`
@@ -304,9 +311,14 @@ function addProcessoVisual(processoNovo, tempo){
     $("#nomes").append(input);
     input = "";
 
+    $("#modoLabel").remove();
     $("#tempo").remove();
 
-    var tempoMedio = `<h4 id="tempo">Tempo Médio: <strong> ${mediaTempoExecucao} s. </strong></h4>`
+    var modo = `<h4 id="modoLabel">${modo}</h4>`
+    $("#modo").append(modo);
+    modo = "";
+
+    var tempoMedio = `<h4 id="tempo">Tempo Médio: <strong> ${mediaTempoExecucao} ms. </strong></h4>`
     $("#tempoMedio").append(tempoMedio);
     tempoMedio = "";
                 
@@ -317,3 +329,9 @@ function limparProcessoVisual(){
         $("#teste").remove();    
     }            
 }
+
+// document.addEventListener('keypress', function(e){
+//     if(e.which == 13){
+//         document.getElementById('buttonInserir').click();
+//     }
+//  }, false);
